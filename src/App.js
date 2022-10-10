@@ -13,7 +13,7 @@ function App() {
   const { user } = useAuthListener();
   console.log('user from App', user);
   return (
-    <div className="App">
+    <UserContext.Provider value={{ user }}>
       <Suspense fallback={<p>Loading...</p>}>
         <Routes>        
           <Route path={ROUTES.LOGIN} element={<Login/>}/>
@@ -24,7 +24,7 @@ function App() {
 
         </Routes>
       </Suspense>
-    </div>
+    </UserContext.Provider>
   );
 }
 
