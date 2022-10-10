@@ -5,7 +5,7 @@ import * as ROUTES from '../../../constants/routes';
 import { doesUsernameExist } from '../../../services/firebase';
 
 export default function SignUp() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { firebase } = useContext(FirebaseContext);
 
   const [username, setUsername] = useState('');
@@ -25,14 +25,9 @@ export default function SignUp() {
         const createdUserResult = await firebase
           .auth()
           .createUserWithEmailAndPassword(emailAddress, password);
-
-        // authentication
-        // -> emailAddress & password & username (displayName)
         await createdUserResult.user.updateProfile({
           displayName: username
         });
-
-        // firebase user collection (create a document)
         await firebase
           .firestore()
           .collection('users')
@@ -46,7 +41,7 @@ export default function SignUp() {
             dateCreated: Date.now()
           });
 
-        history(ROUTES.DASHBOARD);
+        navigate(ROUTES.DASHBOARD);
       } catch (error) {
         setFullName('');
         setEmailAddress('');
