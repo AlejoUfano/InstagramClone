@@ -18,7 +18,7 @@ function App() {
           <Route path={ROUTES.LOGIN} element={<Login />}/>
           <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
           <Route path={ROUTES.PROFILE} element={<Profile />} />
-          <Route path={ROUTES.DASHBOARD} element={<Dashboard user={user} />} />
+          <Route path={ROUTES.DASHBOARD} element={user ? <Dashboard user={user} /> : <Login />} />
           <Route element={<NotFound />} />
         </Routes>
       </Suspense>
